@@ -1,0 +1,46 @@
+{%extends "index.html"%}
+{%block title%}Change Password{%endblock title%} 
+
+{%block body%}
+<br>
+<br>
+<h1 style="color:white;text-align: center;">Change Password</h1><br>
+ <div class="container" style="width:380px;height:550px;">
+
+<form method="POST">
+    {{form.hidden_tag()}}
+    <div style="color:white;word-wrap: break-word;" class="form-floating">
+    <p><h4>Current Password(Hashed): </h4>{{query.password}}</p>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      Note: Once password is hashed, cannot be retreived again !! Do you remember your one?
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+    <div class="form-floating">
+    {{form.password(class_="form-control" ,id="floatingInput", placeholder="anyname")}}<br>
+    <label for="floatingInput">Password</label>
+    {%for error in form.password.errors%}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{error}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+   {%endfor%}
+    </div>
+
+    <div class="form-floating">
+    {{form.retype_pass(class_="form-control" ,id="floatingInput", placeholder="anyname")}}<br>
+    <label for="floatingInput">Retype-Password</label>
+    {%for error in form.retype_pass.errors%}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{error}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+   {%endfor%}
+    </div>
+    <p style="text-align: center;color:aliceblue"  ><b style="color:rgb(238, 255, 0);" >Warning:</b> Change button will change the password without confirmation popup!</p>
+    {{form.change(class="btn btn-lg",style="margin-left:127px;background-color:mintcream;color:black;border-color: black;")}}
+</form>
+</div>
+
+
+{%endblock body%}

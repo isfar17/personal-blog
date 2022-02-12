@@ -1,0 +1,27 @@
+{%extends "index.html"%}
+{%block title%}Profile{%endblock title%} 
+
+{%block body%}
+{%for message in get_flashed_messages()%}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{%endfor%}
+<div class=" p-5 mb-5 bg-light border rounded-3">
+    <h1 style="text-align: center;" class="display-5 fw-bold">User Info</h1><br>
+    <p style="text-align: center;" class=" mu-5 col-md-12 fs-6"><b>Name: </b>{{query.name}}</p>
+    <p style="text-align: center;" class="mb-5 col-md-12  fs-6"><b>Email: </b>{{query.email}}</p>
+    {%if current_user.is_authenticated%}
+        {%if current_user.name==query.name%}
+    <p style="text-align: center;" class="mb-5 col-md-12  fs-6"><a href="{{  url_for('user.update_profile',id=query.id)   }}"><button type="button" class="btn btn-dark">Update</button></a></p>
+    <p style="text-align: center;"><a href="{{  url_for('user.change_pass',id=query.id)   }}"><button type="button" class="btn btn-info">Change Password</button></a><br> <br>
+    <a href="{{  url_for('user.delete_profile',id=query.id)   }}"><button type="button" class="btn btn-danger">Delete Account</button></a>
+    
+<p style="text-align: center;"  ><b style="color:red;" >Danger:</b> Delete button will delete everything about you without confirmation popup!</p>
+    </p>
+        {%endif%}
+    {%endif%}
+</div>
+
+{%endblock body%}

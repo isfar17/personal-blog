@@ -1,0 +1,35 @@
+{%extends "index.html"%}
+{%block title%}Blog_Create{%endblock title%} 
+
+{%block body%}
+
+<br>
+<h1 style="color:white;text-align: center;">What's On Your Mind ??</h1><br>
+<div class="container" style="width:380px;height:550px">
+    <form method="POST">
+        {{form.hidden_tag()}}
+          <div class="form-floating">
+            {{form.title(style="height:100px;",class_="form-control" ,id="floatingInput", placeholder="anyname")}}<br>
+            <label for="floatingInput">Title</label>
+            {%for error in form.title.errors%}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{error}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+           {%endfor%}
+          </div>
+          <div class="form-floating">
+            {{form.content(style="height:280px;",class_="form-control" ,id="floatingInput", placeholder="anyname")}}<br>
+            <label for="floatingPassword">Content</label>
+            {%for error in form.content.errors%}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{error}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+           {%endfor%}
+          </div>
+        {{form.create(class="btn btn-lg btn-primary",style="margin-left:135px;background-color:mintcream;color:black;border-color: black;")}}
+    </form>
+</div>
+
+{%endblock body%}

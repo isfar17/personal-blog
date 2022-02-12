@@ -1,0 +1,21 @@
+{%extends "index.html"%}
+{%block title%}
+Blog
+{%endblock title%} 
+
+{%block body%}
+<div class=" p-5 mb-5 bg-light border rounded-3">
+    <h1 class="display-5 fw-bold">{{query.title}}</h1>
+    <p class="col-md-8 fs-6">{{query.content}}</p>
+    <p class="col-md-8 fs-6">Author : <a style="color: black;text-decoration:none" href="{{url_for('user.profile',id=query.user_id)}}"><b>{{query.created_by}}</b></a></p>
+    {%if current_user.is_authenticated%}
+        {%if current_user.name==query.created_by%}
+    <a href="{{  url_for('blog.update_blog',id=query.id)   }}"><button type="button" class="btn btn-dark">Update</button></a>
+    <a href="{{  url_for('blog.update_blog',id=query.id)   }}"><button type="button" class="btn btn-danger" >Delete</button></a><br>
+    <p><b style="color:red;" >Danger:</b> Delete button will delete the post immediately without confirmation popup!</p>
+        {%endif%}
+    {%endif%}
+  
+</div>
+
+{%endblock body%}

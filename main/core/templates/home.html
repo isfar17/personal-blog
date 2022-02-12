@@ -1,0 +1,35 @@
+{%extends "index.html"%}
+{%block title%}Home{%endblock title%} 
+
+{%block body%}
+{%for message in get_flashed_messages()%}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{%endfor%}
+<br>
+<br>
+{%for i in query.items%}
+<div  style="background-color: rgb(249, 255, 240);" class="p-5 mb-4 rounded-3">
+  <div class="container-fluid py-5">
+    <h1 class="display-6 fw-bold">{{i.title}}</h1>
+    <p class="col-md-8 fs-6">{{i.content[:300]}}.... </p>
+    <a href="{{  url_for('blog.blog_view',id=i.id)   }}"><button style="margin-bottom: 20px;" type="button" class="btn btn-dark">Read More</button></a>
+    <p class="col-md-8 fs-6">Author : <a style="color: black;text-decoration:none" href="{{url_for('user.profile',id=i.user_id)}}"><b>{{i.created_by}}</b></a></p>
+    <p class="col-md-8 fs-6 ">Date: {{i.time.strftime('%d-%m-%Y')}}</p>
+
+  </div>
+</div>
+
+  {%endfor%}
+  <nav aria-label="Standard pagination example">
+    <ul class="pagination">
+        {%for page in query.iter_pages()%}
+        {%if page%}
+      <li class="page-item"><a class="page-link" href="{{url_for('core.home',page=page)}}">{{page}}</a></li>
+        {%endif%}
+        {%endfor%}
+    </ul>
+  </nav>
+{%endblock body%}

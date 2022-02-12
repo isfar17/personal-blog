@@ -1,0 +1,31 @@
+{%extends "index.html"%}
+{%block title%}Contact{%endblock title%} 
+
+{%block body%}
+{%for message in get_flashed_messages()%}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{%endfor%}
+<br>
+<h4 style="color:white;text-align:center;">Hey {{query.name}}! Did you like my website ?</h4><br>
+<div class="container" style="width:380px;height:550px">
+  <p style="color:white;text-align: center;">Please let me know where can I improve.</p>
+<form method="POST">
+    {{form.hidden_tag()}}
+      <div class="form-floating">
+        {{form.feedback(style="height:280px;",class_="form-control" ,id="floatingInput", placeholder="anyname")}}<br>
+        <label for="floatingPassword">Feedback</label>
+        {%for error in form.feedback.errors%}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{error}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+       {%endfor%}
+      </div>
+    {{form.submit(class="btn btn-lg btn-primary",style="margin-left:135px;background-color:mintcream;color:black;border-color: black;")}}
+</form>
+</div>
+
+{%endblock body%}
